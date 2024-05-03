@@ -125,7 +125,7 @@ endif
 
 .PHONY : clean
 clean:
-	@-rm -rf $(ODIR) Output
+	@-rm -f $(ODIR)/*.o $(ODIR)/*.bin $(ODIR)/*.elf $(ODIR)/*.hex Output
 	@echo "--------------"
 	@echo "CLEAN COMPLETE"
 	@echo "--------------"
