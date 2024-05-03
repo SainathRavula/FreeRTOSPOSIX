@@ -5,7 +5,7 @@ SRCROOT         := $(CURDIR)
 #print:
 #	@echo "Value of SRCROOT: $(SRCROOT)"
 .PHONY : print
-ODIR		= obj
+ODIR		= build
 
 VPATH		+= $(SRCROOT)/FreeRTOS
 VPATH		+= $(SRCROOT)/FreeRTOS/portable/MemMang
