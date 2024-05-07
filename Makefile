@@ -7,10 +7,11 @@ SRCROOT         := $(CURDIR)
 .PHONY : print
 ODIR		= build
 
-VPATH		+= $(SRCROOT)/FreeRTOS
-VPATH		+= $(SRCROOT)/FreeRTOS/portable/MemMang
-VPATH		+= $(SRCROOT)/FreeRTOS/portable/GCC/POSIX
-VPATH		+= $(SRCROOT)/Project
+
+vpath %.c $(SRCROOT)/FreeRTOS
+vpath %.c $(SRCROOT)/FreeRTOS/portable/MemMang
+vpath %.c $(SRCROOT)/FreeRTOS/portable/GCC/POSIX
+vpath %.c $(SRCROOT)/Project
 
 C_FILES	+= croutine.c
 C_FILES	+= event_groups.c
