@@ -112,7 +112,7 @@ LIBS = -lpthread
 LINKFLAGS += -L/usr/local/lib      # Default system library search path
 LINKFLAGS += -Wl,-rpath,/usr/local/lib  # Default runtime library search path
 LINKFLAGS += -static                   # Request static linking
-#Static linking is a process where all the library code that your program depends on is copied into the final executable file. 
+#Static linking is a process where all the library code that your program depends on is copied into the final executable file
 
 Output: $(_OBJS)
 	@echo ">> Linking $@..."
