@@ -93,13 +93,13 @@ $(ODIR)/%.o: %.c
 
 
 ifeq ($(verbose),1)
-	@echo ">> Compiling $<"
+	@echo  [CC] "$<"	
 	$(CC) $(CFLAGS) -c -o $@ $<
 else
-	@echo ">> Compiling $(notdir $<)"
+	@echo [CC] "$(notdir $<)"
 	@$(CC) $(CFLAGS) -c -o $@ $<
 endif
-
+#"@" in front of $(CC) will supress the printing of command on terminal
 #The $< and $@ are automatic variables representing the prerequisites (source file) and the target (object file), respectively.
 #$(CC): The compiler command (e.g., gcc);$(CFLAGS): Compiler flags.
 #-c: Indicates that compilation should stop after the object file is created, without linking.
@@ -116,13 +116,12 @@ LINKFLAGS += -static                   # Request static linking
 #Static linking is a process where all the library code that your program depends on is copied into the final executable file
 
 Output: $(_OBJS)
-	@echo ">> Linking $@..."
+	@echo [LD] "$@"
 ifeq ($(verbose),1)
 	$(CC) $(CFLAGS) $^ $(LINKFLAGS) $(LIBS) -o $@
 else
 	@$(CC) $(CFLAGS) $^ $(LINKFLAGS) $(LIBS) -o $@
 endif
-
 
 #$@ is the name of the target so in this rule it is Output
 #$^ represents prerequisites(i.e dependencies) so in this rule it is names in list _OBJS i.e object files
