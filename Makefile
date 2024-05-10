@@ -31,7 +31,8 @@ INCLUDES	+= -I/usr/include/x86_64-linux-gnu/
 #x86_64-linux-gnu typically contains architecture-specific libraries and header files for the x86_64 (64-bit) architecture on Linux systems. 
 
 OBJS 		= $(patsubst %.c,%.o,$(C_FILES)) 
-#creates a list of object files by replacing the ".c" extension with ".o" for each source file listed in the C_FILES variable.This list is then used to track dependencies and to generate rules for compiling each source file into its corresponding object file.
+#creates a list of object files by replacing the ".c" extension with ".o" for each source file listed in the C_FILES variable.
+#This list is then used to track dependencies and to generate rules for compiling each source file into its corresponding object file.
 
 CWARNS 	+= -W
 CWARNS 	+= -Wall
@@ -58,17 +59,25 @@ CFLAGS 	+= -m32
 CFLAGS 	+= -DDEBUG=1
 CFLAGS 	+= -g -UUSE_STDIO -D__GCC_POSIX__=1
 #-g: This flag tells the compiler to generate debug information, which is used by debuggers to map machine code instructions back to the original source code.
-#-UUSE_STDIO: This flag undefines the macro USE_STDIO. If the macro was defined elsewhere, this flag removes its definition, effectively excluding code that depends on it.Undefining a macro like USE_STDIO can help tailor your code to specific requirements, reduce code size, avoid conflicts, and customize library behavior.
-#-D__GCC_POSIX__=1: This defines a macro named __GCC_POSIX__ with the value 1. It indicates that the code should be compiled with POSIX compatibility features provided by the GCC compiler.
+
+#-UUSE_STDIO: This flag undefines the macro USE_STDIO. If the macro was defined elsewhere, this flag removes its definition, 
+#effectively excluding code that depends on it.
+#Undefining a macro like USE_STDIO can help tailor your code to specific requirements, reduce code size, avoid conflicts, and customize 
+#library behavior.
+
+#-D__GCC_POSIX__=1: This defines a macro named __GCC_POSIX__ with the value 1. 
+#It indicates that the code should be compiled with POSIX compatibility features provided by the GCC compiler.
 
 ifneq ($(shell uname), Darwin)
 CFLAGS += -pthread 
 endif
 #Darwin => macOS ; if not equal to macOS then add pthread flag
-#The -pthread flag is typically used to indicate that the program should be linked with the POSIX thread library, necessary for multithreaded programs on Unix-like systems 
+#The -pthread flag is typically used to indicate that the program should be linked with the POSIX thread library, necessary for 
+#multithreaded programs on Unix-like systems 
 
 CFLAGS 	+= -DMAX_NUMBER_OF_TASKS=300
-#preprocessor macro;When you use -D followed by a macro name, you're telling the compiler to define that macro with a specific value before compiling the source code.
+#preprocessor macro;When you use -D followed by a macro name, you're telling the compiler to define that macro with a specific value 
+#before compiling the source code.
  
 CFLAGS 	+= $(INCLUDES) $(CWARNS) -O2 
 #opt levels=>0-3 and Os,Ofast
@@ -89,7 +98,8 @@ $(ODIR)/%.o: %.c
 	
 #target:dependecies
 #$@ is an automatic variable in makefiles that represents the target of the rule.
-#for this rule the $@ is name of the object file being built;$(dir $@) extracts the directory portion of the object file's path(ex:-obj/tasks.o,so obj is being extracted),and creates the "obj" directory to keep all the object files
+#for this rule the $@ is name of the object file being built;$(dir $@) extracts the directory portion of the object 
+#file's path(ex:-obj/tasks.o,so obj is being extracted),and creates the "obj" directory to keep all the object files
 
 
 ifeq ($(verbose),1)
